@@ -18,3 +18,4 @@ def one_hot_encode(X, cat_features):
         hot_one = pd.get_dummies(X_cat[name], prefix=name)
         X = pd.concat([X, hot_one.set_index(X.index)], axis=1)
     return X
+
