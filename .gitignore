@@ -1,7 +1,23 @@
-# Jupyter checkpoints
+
+data*
+lightning_logs*
+
+# Jupyter stuff and pycache
 **checkpoint.ipyn**
+**checkpoint**
 **checkpoint.ipy**
-**_checkpoints**
+
+# vs code files
+.vscode/settings.json
+**settings.json**
+# **bioinformatics.code-workspace
+**pycache**
+**.pyc 
+
+# PyCharm files
+# .idea** 
+
+# ------------------------ latex -------------------
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
@@ -253,5 +269,3 @@ TSWLatexianTemp*
 # videos
 **.mp4
 
-
-docstring_generator.py
