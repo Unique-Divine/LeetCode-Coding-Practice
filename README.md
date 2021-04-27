@@ -22,7 +22,7 @@ Update '2021-04-27': I've also started making a package of useful tools for quic
 <!-- Include a demo too.  -->
 
 
-## Notebooks [[link]](https://github.com/Unique-Divine/Master-Chef/tree/master/notebooks)
+## [Notebooks](https://github.com/Unique-Divine/Master-Chef/tree/master/notebooks)
 
 #### 1. Data Science Cookbook
 - [ ] TODO: Add time series section OR plan out a time series cookbook project.

@@ -1,5 +1,6 @@
 
-data*
+local*
+data
 lightning_logs*
 
 # Jupyter stuff and pycache
