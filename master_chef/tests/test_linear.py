@@ -21,8 +21,8 @@ class TestModels:
 
     def test_quick_pass(self):
 
-        current_file_dir = os.path.dirname(os.path.realpath(__file__))
-        root_dir = os.path.dirname(current_file_dir)
+        current_file_parent_dir = os.path.dirname(os.path.realpath(__file__))
+        root_dir = os.path.dirname(current_file_parent_dir)
         os.chdir(root_dir)
         data_module = data_modules.MNISTDataModule(
             data_dir=os.path.join(os.getcwd(), 'data'), 
@@ -44,10 +44,12 @@ class TestModels:
         trainer.fit(lit_module, datamodule=data_module)
 
 def manual_run():
-    for test in [
+    for test in [\
         TestModels().test_quick_pass]:
         test()
         print(f"Test '{test.__name__}' passed.")
+
+# manual_run()
 
 """
 Hide pytest warnings: https://stackoverflow.com/a/50821160/13305627
