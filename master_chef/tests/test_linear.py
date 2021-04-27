@@ -1,8 +1,8 @@
+import os, sys
 import torch 
 import torch.nn as nn
 import pytorch_lightning as pl
 def import_master_chef():
-    global os, sys
     try: 
         import master_chef
     except:
@@ -20,7 +20,14 @@ class TestModels:
     lr = 1e-3
 
     def test_quick_pass(self):
-        data_module = data_modules.MNISTDataModule()
+
+        current_file_dir = os.path.dirname(os.path.realpath(__file__))
+        root_dir = os.path.dirname(current_file_dir)
+        os.chdir(root_dir)
+        data_module = data_modules.MNISTDataModule(
+            data_dir=os.path.join(os.getcwd(), 'data'), 
+            batch_size = 50
+        )
         mnist_img_dims = (1, 28, 28)
         channels, width, height = mnist_img_dims  
 
@@ -36,6 +43,11 @@ class TestModels:
         trainer = pl.Trainer(gpus=0, fast_dev_run=True)
         trainer.fit(lit_module, datamodule=data_module)
 
+def manual_run():
+    for test in [
+        TestModels().test_quick_pass]:
+        test()
+        print(f"Test '{test.__name__}' passed.")
 
 """
 Hide pytest warnings: https://stackoverflow.com/a/50821160/13305627

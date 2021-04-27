@@ -12,4 +12,8 @@ from master_chef import data_modules
 
 class TestImports:
     def test_root(self):
-        exec(open('../__init__.py').read()) 
+        current_file_parent_dir = os.path.dirname(os.path.realpath(__file__))
+        root_dir = os.path.dirname(current_file_parent_dir)
+        os.chdir(root_dir)
+        exec(open('__init__.py').read()) 
+
