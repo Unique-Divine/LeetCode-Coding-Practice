@@ -43,13 +43,13 @@ class TabularDataset(dataset.Dataset):
             self.X = X.float()
         else:
             raise Exception("Impossible!")
-            
+
         if isinstance(Y, ndarray):
-            Y = Y.reshape(-1, 1)
-            self.Y = torch.from_numpy(Y).float()
+            Y = Y.reshape(-1)
+            self.Y = torch.from_numpy(Y).long()
         elif isinstance(Y, Tensor):
-            Y = Y.view(-1, 1)
-            self.Y = Y.float()
+            Y = Y.view(-1)
+            self.Y = Y.long()
         else:
             raise Exception("Impossible!")
         
