@@ -30,7 +30,7 @@ from master_chef.data_loading.toy_datasets import TabularDataset
 from master_chef.data_loading import toy_datasets
 
 
-class ToyMNIST(pl.LightningDataModule):
+class ToyMNISTDM(pl.LightningDataModule):
     def __init__(self, batch_size: int):
         super().__init__()
         self.batch_size = batch_size

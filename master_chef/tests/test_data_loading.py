@@ -8,9 +8,8 @@ def import_master_chef():
         exec(open('__init__.py').read()) 
         import master_chef
 import_master_chef()
-from master_chef import linear
-from master_chef import data_modules
-from master_chef.data_loading import toy_datasets 
+from master_chef import ffnn
+from master_chef.data_loading import toy_datasets, data_modules 
 from torch.utils.data import dataset
 from torch import Tensor
 
