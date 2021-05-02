@@ -9,9 +9,9 @@ def import_master_chef():
         exec(open('__init__.py').read()) 
         import master_chef
 import_master_chef()
-from master_chef import linear
-from master_chef import data_modules
-
+from master_chef import ffnn, lit_modules
+from master_chef.data_loading import data_modules
+import sklearn.datasets
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -19,23 +19,21 @@ warnings.filterwarnings('ignore')
 class TestModels:
     lr = 1e-3
 
-    def test_quick_pass(self):
+    def test_classifier_quick_pass(self):
 
         current_file_parent_dir = os.path.dirname(os.path.realpath(__file__))
         root_dir = os.path.dirname(current_file_parent_dir)
         os.chdir(root_dir)
-        data_module = data_modules.MNISTDataModule(
-            data_dir=os.path.join(os.getcwd(), 'data'), 
-            batch_size = 50
-        )
-        mnist_img_dims = (1, 28, 28)
-        channels, width, height = mnist_img_dims  
+        data_module: pl.LightningDataModule = data_modules.ToyMNISTDM(
+            batch_size = 50)
+        
+        img_dim = sklearn.datasets.load_digits().data.shape[1]
 
-        network = linear.FFNNClassifier(
-            input_dim = channels * width * height,
+        network = ffnn.FFNNClassifier(
+            input_dim = img_dim,
             num_classes = 10,
             num_hidden_layers = 1,)
-        lit_module = linear.LitClassifier(
+        lit_module = lit_modules.LitClassifier(
             model = network, 
             loss_fn = nn.CrossEntropyLoss(), 
             lr = self.lr)
@@ -45,11 +43,11 @@ class TestModels:
 
 def manual_run():
     for test in [\
-        TestModels().test_quick_pass]:
+        TestModels().test_classifier_quick_pass]:
         test()
         print(f"Test '{test.__name__}' passed.")
 
-# manual_run()
+manual_run()
 
 """
 Hide pytest warnings: https://stackoverflow.com/a/50821160/13305627

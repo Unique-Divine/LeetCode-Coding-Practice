@@ -8,9 +8,8 @@ def import_master_chef():
         exec(open('__init__.py').read()) 
         import master_chef
 import_master_chef()
-from master_chef import linear
-from master_chef import data_modules
-from master_chef.data_loading import toy_datasets 
+from master_chef import ffnn
+from master_chef.data_loading import toy_datasets, data_modules 
 from torch.utils.data import dataset
 from torch import Tensor
 
@@ -26,8 +25,8 @@ class TestToyDatasets:
             raise ValueError(
                 "'kind' must be regression or classification, i.e. 'r' or 'c'")
         get_toy_ds = dict(
-            mnist = toy_datasets.SklearnToyDatasets.mnist,
-            diabetes = toy_datasets.SklearnToyDatasets.diabetes,
+            mnist = toy_datasets.SklearnToys.mnist,
+            diabetes = toy_datasets.SklearnToys.diabetes,
         )
         
         toy_dataset = get_toy_ds[kind]()

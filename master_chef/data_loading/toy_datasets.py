@@ -15,11 +15,12 @@ class TabularDataset(dataset.Dataset):
         self.Y = Y
         self.check_for_valid_inputs()
         self.convert_data_to_tensors()
+        self.n_samples = self.X.shape[0]
 
     def __getitem__(self, idx):
         return self.X[idx], self.Y[idx]
     
-    def __len__(self):
+    def __len__(self) -> int:
         return self.n_samples
     
     def check_for_valid_inputs(self):
@@ -42,19 +43,19 @@ class TabularDataset(dataset.Dataset):
             self.X = X.float()
         else:
             raise Exception("Impossible!")
-            
+
         if isinstance(Y, ndarray):
-            Y = Y.reshape(-1, 1)
-            self.Y = torch.from_numpy(Y).float()
+            Y = Y.reshape(-1)
+            self.Y = torch.from_numpy(Y).long()
         elif isinstance(Y, Tensor):
-            Y = Y.view(-1, 1)
-            self.Y = Y.float()
+            Y = Y.view(-1)
+            self.Y = Y.long()
         else:
             raise Exception("Impossible!")
         
         assert isinstance(X, (ndarray, Tensor))
 
-class SklearnToyDatasets:
+class SklearnToys:
     @staticmethod
     def mnist() -> dataset.Dataset: 
         sklearn_toy_ds = sklearn.datasets.load_digits()
