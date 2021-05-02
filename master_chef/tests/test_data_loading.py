@@ -25,8 +25,8 @@ class TestToyDatasets:
             raise ValueError(
                 "'kind' must be regression or classification, i.e. 'r' or 'c'")
         get_toy_ds = dict(
-            mnist = toy_datasets.SklearnToyDatasets.mnist,
-            diabetes = toy_datasets.SklearnToyDatasets.diabetes,
+            mnist = toy_datasets.SklearnToys.mnist,
+            diabetes = toy_datasets.SklearnToys.diabetes,
         )
         
         toy_dataset = get_toy_ds[kind]()

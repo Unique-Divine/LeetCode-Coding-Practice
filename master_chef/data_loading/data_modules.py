@@ -46,7 +46,7 @@ class ToyMNISTDM(pl.LightningDataModule):
 
     def setup(self, stage=None):
         if stage in ['fit', None]:
-            train_size = round(0.9 * self.train_size)
+            train_size = round(0.9 * self.train_val_size)
             val_size = self.train_val_size - train_size
 
             self.train_data, self.val_data = dataset.random_split(
