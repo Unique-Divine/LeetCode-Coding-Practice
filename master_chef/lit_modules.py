@@ -75,4 +75,59 @@ class LitClassifier(pl.LightningModule):
                  on_step=True, on_epoch=False)
         self.log('test_acc_step', self.test_accuracy, 
                  on_step=True, on_epoch=True)
-        return self.validation_step(batch, batch_idx)
+        return loss
+
+class LitRegressor(pl.LightningModule):
+    def __init__(self, 
+                 model: nn.Module,
+                 loss_fn,
+                 lr: float,):
+        super().__init__()
+        self.model = model
+        self.lr = lr
+        self.loss_function = loss_fn
+
+    def forward(self, x: Tensor) -> Tensor:
+        preds = self.model(x)
+        return preds 
+
+    def configure_optimizers(self):
+        optimizer = torch.optim.Adam(
+            params=self.parameters(), 
+            lr = self.lr)
+        return optimizer
+
+    # --------------- Training and validation steps --------------- #
+
+    def training_step(self, batch, batch_idx):
+        # Perform step
+        x, y = batch
+        preds = self(x)
+        loss = self.loss_function(preds, y)
+        
+        # Log step
+        self.log('train_loss_step', loss, on_step=True, on_epoch=False,
+                 prog_bar=False)
+        return loss
+    
+    def validation_step(self, batch, batch_idx):
+        # Perform step
+        x, y = batch
+        preds = self(x)
+        loss = self.loss_function(preds, y)
+        
+        # Log step
+        self.log('val_loss_step', loss, on_step=True, on_epoch=False, 
+                 prog_bar=True)
+        return loss
+    
+    def test_step(self, batch, batch_idx):
+        # Perform step
+        x, y = batch
+        preds = self(x)
+        loss = self.loss_function(preds, y)
+
+        # Log step
+        self.log('test_loss_step', loss, 
+                 on_step=True, on_epoch=False)
+        return loss
