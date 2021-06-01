@@ -1,12 +1,12 @@
 # Master Chef
 
-![Python 3.7+] [![License: MIT]](https://github.com/Unique-Divine/SA-Project/blob/main/LICENSE)
+![Python 3.8+] [![License: MIT]](https://github.com/Unique-Divine/SA-Project/blob/main/LICENSE)
 
 Master Chef consists of two things:
 1. A [package] to help with quickly setting up deep learning models in the [PyTorch Lightning][pl] paradigm. 
 2. A [programming cookbook][devdungeon-cookbook] for Python, data science, and machine learning. 
 
-[Python 3.7+]: https://img.shields.io/badge/python-3.7+-blue.svg
+[Python 3.8+]: https://img.shields.io/badge/python-3.8+-blue.svg
 [License: MIT]: https://img.shields.io/badge/License-MIT-yellow.svg 
 [package]: https://github.com/Unique-Divine/Master-Chef/tree/master/master_chef
 [pl]: https://www.pytorchlightning.ai/
