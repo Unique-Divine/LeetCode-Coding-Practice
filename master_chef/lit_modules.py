@@ -6,6 +6,7 @@ import numpy as np
 from torch import Tensor
 
 class LitClassifier(pl.LightningModule):
+    """PyTorch Lightning Module for supervised classification. """
     def __init__(self, 
                  model: nn.Module,
                  loss_fn,
@@ -78,6 +79,7 @@ class LitClassifier(pl.LightningModule):
         return loss
 
 class LitRegressor(pl.LightningModule):
+    """PyTorch Lightning Module for supervised regression."""
     def __init__(self, 
                  model: nn.Module,
                  loss_fn,

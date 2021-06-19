@@ -4,7 +4,7 @@ import numpy as np
 from torch.utils.data import dataset
 from numpy import ndarray
 from torch import Tensor
-from typing import Union
+from typing import Union, Tuple 
 import sklearn.datasets
 
 class TabularDataset(dataset.Dataset):
@@ -19,7 +19,7 @@ class TabularDataset(dataset.Dataset):
         self.convert_data_to_tensors()
         self.n_samples = self.X.shape[0]
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx) -> Tuple[Tensor, Tensor] :
         return self.X[idx], self.Y[idx]
     
     def __len__(self) -> int:
@@ -43,6 +43,9 @@ class TabularDataset(dataset.Dataset):
             self.kind = "c"
         else:
             self.kind = "r"
+        if self.X.shape[0] != self.Y.shape[0]:
+            raise ValueError("Shape mismatch. X and Y should have the same " 
+                + "number of rows")
     
     def convert_data_to_tensors(self):
         X, Y = self.X, self. Y
